@@ -5,7 +5,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <StartupObject>ArrayPractice.EasyPractice</StartupObject>
+    <StartupObject>ArrayPractice.Bascis</StartupObject>
   </PropertyGroup>
 
 </Project>

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,24 +12,82 @@ namespace ArrayPractice
     {
         static void Main(string[] args)
         {
-            var arr = new int[] { 1, 2, 3, 4, 5, 0, 7,1,2,3,3,4 };
-            int index = 5;
-            // KtimesRotation(arr, index);
-            int[] ar = { -1, -1, 6, 1, 9,
-                     3, 2, -1, 4, -1 };
-
-            // DistnictNumbeRFromArray(arr);
-            ElementOnce(arr);
-
-           // SecondLargestNumber(ar);
-
-            // MultipleLargest(arr);
-            //ReArrangeArray(ar);
-            // MoveZerosToEnd(arr);
-            // SegreGateOddEven(arr);
-            // var result = KthSmallestAndLargestElement(arr, index);
-            //Console.WriteLine(result);
+            var arr = new int[] { 1, 2, 3, 4, 5, 6 ,6,6,6,6};
+            int value = 7;
+            int pos = 5;
+            // InsertAtEnd(arr, value);
+            // InsertAtPosition(arr, value, pos);
+            DuplicateInArray(arr);
         }
+
+        public static void InsertAtEnd(int[] arr, int value)
+        {
+            //by appending the value
+            var result = arr.Append(value);
+            foreach (var item in result)
+            {
+                Console.WriteLine(item);
+            }
+            //2nd method
+
+            Array.Resize(ref arr, arr.Length + 1);
+            arr[arr.Length - 1] = value;
+            foreach (var item in arr)
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        public static void InsertAtPosition(int[] arr, int value, int pos)
+        {
+            var newArray = new int[arr.Length + 1];
+            for (int i = 0; i < arr.Length + 1; i++)
+            {
+                if (i < pos - 1)
+                    newArray[i] = arr[i];
+                else if (i == pos - 1)
+                    newArray[i] = value;
+                else
+                    newArray[i] = arr[i - 1];
+            }
+
+            foreach (var item in newArray)
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        public static void DuplicateInArray(int[] arr)
+        {
+
+            for(int i =0; i < arr.Length; i++)
+            {
+                for (int j = 1; j < arr.Length-1; j++)
+                {
+                    if (arr[i] == arr[j])
+                    {
+                        Console.WriteLine("DUPLICATE NUMBER" +arr[i]);  
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public static void KtimesRotation(int[] arr, int k)
         {
             var newArray = new int[arr.Length];
@@ -139,7 +199,7 @@ namespace ArrayPractice
         {
             var frist = 0; var second = 0; var third = 0;
 
-            for (int i = 0; i <= arr.Length-1; i++)
+            for (int i = 0; i <= arr.Length - 1; i++)
             {
                 if (arr[i] > frist)
                 {
@@ -158,7 +218,7 @@ namespace ArrayPractice
                 }
             }
 
-            Console.WriteLine("fritst value " + frist +  "second value "+ second + "third value "+third);
+            Console.WriteLine("fritst value " + frist + "second value " + second + "third value " + third);
 
         }
 
@@ -169,7 +229,7 @@ namespace ArrayPractice
 
             int largest = int.MinValue;
             int second = int.MinValue;
-            if (arr.Length<2) { Console.WriteLine("invalid input"); return; }
+            if (arr.Length < 2) { Console.WriteLine("invalid input"); return; }
 
             for (int i = 0; i < arr.Length; i++)
             {
@@ -178,7 +238,7 @@ namespace ArrayPractice
 
             for (int i = 0; i < arr.Length; i++)
             {
-                if (arr[i]!= largest)
+                if (arr[i] != largest)
                 {
                     second = Math.Max(second, arr[i]);
                 }
@@ -195,7 +255,7 @@ namespace ArrayPractice
         public static void DistnictNumbeRFromArray(int[] arr)
         {
             var set = new HashSet<int>();
-            for(int i =0; i <arr.Length; i++)
+            for (int i = 0; i < arr.Length; i++)
             {
                 if (!set.Contains(arr[i]))
                 {
@@ -206,17 +266,18 @@ namespace ArrayPractice
             foreach (var item in set)
             {
                 Console.WriteLine(item);
-            }            }
+            }
+        }
 
         public static void ElementOnce(int[] arr)
         {
-            for (int i = 0; i < arr.Length-1; i++)
+            for (int i = 0; i < arr.Length - 1; i++)
             {
                 if (arr[i] != arr[i + 1])
                 {
                     Console.WriteLine(arr[i]);
-                }  
-              
+                }
+
             }
         }
 
@@ -244,5 +305,42 @@ namespace ArrayPractice
             }
             return goodpairs;
         }
+
+        public static void Paging(List<int> list)
+        {
+            var pagenumber = 10;
+            var pageSize = 10;
+            var result = list.OrderBy(x => x).Skip(pagenumber - 1 * pageSize).Take(pageSize).ToList();
+            // 9*10 = 90 40
+            foreach (var item in result)
+            {
+                Console.Write(item + " , ");
+            }
+        }
+
+        public static void convertArray(int[] arr, int row, int column)
+        {
+            var result = new int[row, column];
+            if (row * column == arr.Length)
+            {
+                for (int i = 0; i < row; i++)
+                {
+                    for (int j = 0; j < column; j++)
+                    {
+                        result[i, j] = arr[i * column + j];
+                    }
+                }
+            }
+            foreach (var item in result)
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+
+
+
     }
-    }
+
+
+}

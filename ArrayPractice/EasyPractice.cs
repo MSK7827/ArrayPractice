@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
@@ -11,22 +12,22 @@ namespace ArrayPractice
     {
         static void Main(string[] args)
         {
-              int[] arr = new int[] { 1,2,2,3,3,5 };
-              int[] index = new int[] { 3, 0, 4, 1, 2 };
-            var n = 4;
-           var rresult = FrstReapeatingChar(arr);
-            Console.WriteLine(rresult);
-           // MissingNumber(arr, n);
-            //var res = ReOrderArray(arr, index);
-            //foreach (var item in res)
-            //{
-            //    Console.WriteLine(item);
-            //}
-            //var result = SmallerNumbersThanCurrent(arr);
-            //foreach (var item in result)
-            //{
-            //    Console.WriteLine(item);
-            //}
+              int[] arr = new int[] {1,0,2,2,0,1 };
+            //kadnesAlgortham(arr);
+
+
+            var arr2 = new int[] { 1, 2, 4, 5, 6, 7, 0,9,15 };
+
+            //Leader(arr2);
+
+            KthSmallestAndMaximumNumber(arr2,4);
+
+
+           //var result = SortArrays(arr);
+           // foreach (var item in result)
+           // {
+           //     Console.WriteLine(item);
+           // }
         }
 
         public static int[] SmallerNumbersThanCurrent(int[] nums)
@@ -65,34 +66,130 @@ namespace ArrayPractice
 
         public static void MissingNumber(int[] nums, int n)
         {
-            var result = 0;
-          
             int sum = n * (n + 1) / 2;
             for (int i = 0; i < nums.Length; i++)
             {
                 sum -= nums[i];
             }
-            int missingNumber = sum - result;
             Console.WriteLine(sum);
         }
 
-        public static int FrstReapeatingChar(int[] arr)
+        public static void kadnesAlgortham(int[] arr)
         {
-            var index = 0;
-            for(int i =0; i < arr.Length; i++)
+            var maxSum = arr[0];
+            var CurSum = arr[0];
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                CurSum = Math.Max(arr[i], CurSum + arr[i]);
+                maxSum = Math.Max(maxSum, CurSum);
+            }
+
+            Console.WriteLine(maxSum);
+        }
+        //I have to do
+        public static int MinimumNumberOfJumps(int[] arr)
+        {
+            int minJumps = 0;
+
+            if (arr.Length == 0 && arr[0] == 0) return 0;
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+               
+
+            }
+
+
+            return minJumps;
+        }
+
+        //Wrong .. will check later
+        public static int[] SortArrays(int[] arr)
+        {
+            var result = new int[arr.Length];
+            int low = 0;
+            int high = arr.Length - 1;
+            int mid = 0;
+            var temp = 0;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] == 0)
+                {
+                    temp= arr[low];
+                    arr[low] = arr[mid];
+                    arr[mid] = temp;
+                    low++;
+                    mid++;
+                }
+                if (arr[1] == 1)
+                {
+                    mid++;
+                    
+                }
+                if (arr[i] == 2)
+                {
+                    temp = arr[mid];
+                    arr[mid] = arr[high];
+                    arr[high] = temp;
+                    high--;
+                }
+            }
+
+            return result;
+        }
+
+        public static void Leader(int[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                int j;
+                for (j = i + 1; j < arr.Length; j++)
+                {
+                    if (arr[i] <= arr[j])
+                        break;
+                }
+
+                // the loop didn't break
+                if (j == arr.Length)
+                    Console.Write(arr[i] + " ");
+            }
+            //for (int i = 0; i < arr.Length; i++)
+            //{
+            //    for (int j = 1; j < arr.Length; j++)
+            //    {
+            //        if (arr[i] <= arr[j])
+            //        {
+            //            break;
+            //        }
+            //        if(j == arr.Length)
+            //        {
+            //            Console.WriteLine(arr[i]+ ",");
+            //        }
+
+            //    }
+            //}
+        }
+
+        //will do later
+        public static void KthSmallestAndMaximumNumber(int[] arr, int k)
+        {
+            var result = 0;
+            int smallest = 0;
+            int max = 0;
+            for (int i = 0; i < arr.Length; i++)
             {
                 for (int j = 0; j < arr.Length; j++)
                 {
-                    if (arr[i] == arr[j])
+                    if (arr[i] < arr[j])
                     {
-                        index = Array.IndexOf(arr, arr[j]);
-                       
+                        smallest = i;
                     }
-                    break;
                 }
-               
             }
-            return index;
+            Console.WriteLine(smallest);
         }
+
+
     }
 }
